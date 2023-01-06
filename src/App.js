@@ -32,7 +32,7 @@ function App() {
       <header className="App-header">
         <h1>Smart Contract</h1>
         <p>{account}</p>
-        <button onClick = {connectMetamask}>{account? "Connected":"Connect to Metamask" }</button> <br />
+        <button onClick = {connectMetamask}  >{account? "Connected":"Connect to Metamask" }</button> <br />
       </header>
       <section>
         <div className = "content">

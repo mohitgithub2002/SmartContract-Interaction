@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import '../App.css'
+import '../pages.css'
 import { ethers } from 'ethers';
 
-import connectContract from '../connectContract';
+import {contract} from '../connectContract';
 
 function CreateId() {
   const [name, setName] = useState('');
@@ -13,29 +13,32 @@ function CreateId() {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    // Send the name, email, and password to the server
-    const Contract = connectContract.contract;
-    const create = await Contract.createID(email, password, name)
-    console.log(create);
+    // Send the name, email, and password to the contract
+    const create = await contract.createID(email, password, name)
+    const txreceipt = await create.wait();
+    console.log(txreceipt);
 
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className='field'>
+    <form onSubmit={handleSubmit} className="form">
       <label>
         Name:
         <input
           type="text"
+          placeholder='Full-Name'
           value={name}
           onChange={(event) => setName(event.target.value)}
         />
       </label>
       <br />
-      <label>
+      <label >
         Email:
         <input
           type="email"
           value={email}
+          placeholder='Email '
           onChange={(event) => setEmail(event.target.value)}
         />
       </label>
@@ -45,12 +48,14 @@ function CreateId() {
         <input
           type="password"
           value={password}
+          placeholder='password'
           onChange={(event) => setPassword(event.target.value)}
         />
       </label>
       <br />
-      <button type="submit">Sign up</button>
+      <button type="submit" className='form-btn'>Sign up</button>
     </form>
+    </div>
   );
 }
 

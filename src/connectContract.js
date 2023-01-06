@@ -1,7 +1,7 @@
 import { ethers } from 'ethers';
-
+let contract;
 const connectContract = async () => {
-    const Address = "0x501751c2Ae11a233455c182b0Ee86Ad7621AaFA6"
+    const Address = "0x0544Eb15E405692d1542791B5CB7c2E13F98a009"
     const Abi = [
       {
         "inputs": [],
@@ -125,7 +125,8 @@ const connectContract = async () => {
     ];
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-    const contract = new ethers.Contract(Address, Abi, signer);
+     contract = new ethers.Contract(Address, Abi, signer);
     console.log(contract.address);
 }
 export default connectContract;
+export {contract};
