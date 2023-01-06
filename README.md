@@ -5,7 +5,7 @@ This project demonstrates a basic Intreact from smart contract through reactjs f
 Commands to run
 
 ```shell
-npx install
+npm install
 
 npm start
 ```
