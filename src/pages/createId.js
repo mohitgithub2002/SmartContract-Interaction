@@ -8,6 +8,8 @@ function CreateId() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const [result, setResult] = useState(true);  //for showing the form submission and print response
   
 
   async function handleSubmit(event) {
@@ -17,44 +19,61 @@ function CreateId() {
     const create = await contract.createID(email, password, name)
     const txreceipt = await create.wait();
     console.log(txreceipt);
-
+    setResult(false);
   }
 
   return (
     <div className='field'>
-    <form onSubmit={handleSubmit} className="form">
-      <label>
-        Name:
-        <input
-          type="text"
-          placeholder='Full-Name'
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-        />
-      </label>
-      <br />
-      <label >
-        Email:
-        <input
-          type="email"
-          value={email}
-          placeholder='Email '
-          onChange={(event) => setEmail(event.target.value)}
-        />
-      </label>
-      <br />
-      <label>
-        Password:
-        <input
-          type="password"
-          value={password}
-          placeholder='password'
-          onChange={(event) => setPassword(event.target.value)}
-        />
-      </label>
-      <br />
-      <button type="submit" className='form-btn'>Sign up</button>
-    </form>
+      {result?
+        <div>
+          <form onSubmit={handleSubmit} className="form">
+            <div className='input' >
+            <label className='label'>
+              Name:
+            </label>
+            <input
+              type="text"
+              placeholder='Full-Name'
+              value={name}
+              className='form-input'
+              onChange={(event) => setName(event.target.value)}
+            />
+            </div>
+            
+            <div className='input' >
+            <label className='label' >
+              Email:
+            </label>
+              <input
+                type="email"
+                value={email}
+                className='form-input'
+                placeholder='Email '
+                onChange={(event) => setEmail(event.target.value)}
+              />
+            </div>
+            
+            <div className='input' >
+            <label className='label'>
+              Password:
+            </label>
+              <input
+                type="password"
+                value={password}
+                className='form-input'
+                placeholder='password'
+                onChange={(event) => setPassword(event.target.value)}
+              />
+            </div>
+            <br />
+            <button type="submit" className='form-btn'>Sign up</button>
+          </form>
+        </div>
+        :
+        <div className='result-section'>
+          <h1>{name} is registered with email: {email} </h1>
+        </div>
+      }
     </div>
   );
 }

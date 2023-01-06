@@ -19,7 +19,8 @@
     padding: 5px;
     margin: 5px;
     font-family: sans-serif;
-    border: none;
+    border:10px;
+    border-color: black;
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
@@ -65,12 +66,43 @@
     padding: 5px;
     margin: 5px;
     font-family: sans-serif;
-    border: none;
-    border-radius: 5px;
+    border-style: double;
+    border: 10px;
+    border-color: black;
+    border-radius: 20px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     
 }
 
+.form-input{
+    width: 200px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+    font-size: 20px;
+    font-family: sans-serif;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.input{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    
+    
+    margin-bottom: 5px;
+}
+
+.label{
+    font-size: 20px;
+    font-family: sans-serif;
+    display: flex;
+    padding-left: 7px;
+    align-items: flex-start;
+}
 
 

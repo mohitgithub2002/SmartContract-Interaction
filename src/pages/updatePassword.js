@@ -6,6 +6,8 @@ function UpdatePassword() {
   const [password, setPassword] = useState('');
   const [ethereumAddress, setEthereumAddress] = useState('');
 
+  const [result, setResult] = useState(true);  //for showing the form submission and print result
+
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -13,33 +15,50 @@ function UpdatePassword() {
     const update = await contract.updatePassword(password, ethereumAddress);
     const txreceipt = await update.wait();
     console.log(txreceipt);
+    setResult(false);
   }
+
+  console.log(result);
 
   return (
     <div className='field'>
-    <form onSubmit={handleSubmit} className='form'>
-      <label >
-        Password:
-        <input
-          type="password"
-          placeholder='password'
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-      </label>
-      <br />
-      <label>
-        Ethereum address:
-        <input
-          type="text"
-          placeholder='ethereum address'
-          value={ethereumAddress}
-          onChange={(event) => setEthereumAddress(event.target.value)}
-        />
-      </label>
-      <br />
-      <button type="submit" className='form-btn'>Update Password</button>
-    </form>
+      {result ? 
+      <div >
+      <form onSubmit={handleSubmit} className='form'>
+        <div className='input' >
+        <label className='label' >
+          Password:
+        </label>
+          <input
+            type="password"
+            className='form-input'
+            placeholder='password'
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
+        </div>
+
+        <div className='input' >
+        <label className='label'>
+          Ethereum address:
+        </label>
+          <input
+            type="text"
+            className='form-input'
+            placeholder='ethereum address'
+            value={ethereumAddress}
+            onChange={(event) => setEthereumAddress(event.target.value)}
+          />
+        </div>
+
+        <button type="submit" className='form-btn'>Update Password</button>
+      </form>
+      </div>
+      :
+      <div className='result-section'>
+      <h1>Your Password is Updated</h1>
+      </div>
+  }
     </div>
   );
 }
