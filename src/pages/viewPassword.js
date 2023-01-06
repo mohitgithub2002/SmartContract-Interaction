@@ -8,19 +8,26 @@ function ViewPassword() {
   const [result, setResult] = useState(true);  //for showing the form submission and print result
   const [pswd, setPswd] = useState('null');    // for storing the password from contract
   
-  async function handleSubmit(event) {
-    
-    event.preventDefault();
+  const [error, setError] = useState(false);      //for storing the error message
 
-    // Send the Ethereum address to the contract
-    const password = await contract.ViewPassword(ethereumAddress);
-    setPswd(password);
+  
+    async function handleSubmit(event) {
+      
+      event.preventDefault();
+      try{
+        // Send the Ethereum address to the contract
+        const password = await contract.ViewPassword(ethereumAddress);
+        setPswd(password);
+        setResult(false)
+        
+      }catch(err){
+        setResult(true);
+        setError('you are not created this account');
+        
+      }
+      
+    }
 
-    //setting result to false to show the response
-    setResult(false);
-  }
-
-  console.log(pswd);
   return (
     <div className='field'>
       {result?
@@ -38,6 +45,7 @@ function ViewPassword() {
               className='form-input'
               onChange={(event) => setEthereumAddress(event.target.value)}
             />
+            {error}
           <br />
           </div>
           <button type="submit" className='form-btn' >Show Password</button>
@@ -46,7 +54,7 @@ function ViewPassword() {
       :
         //showing response from contract
         <div className='result-section'>
-          <h1>your password is {pswd}</h1>
+          <h1>{`your password is ${pswd}`}</h1>
         </div>
       }  
     </div>

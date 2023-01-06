@@ -8,17 +8,22 @@ function UpdatePassword() {
 
   const [result, setResult] = useState(true);  //for showing the form submission and print result
 
+  const [error, setError] = useState(); //for storiing the error
+
   async function handleSubmit(event) {
     event.preventDefault();
+    try{
+      // Send the password and Ethereum address to the contract
+      const update = await contract.updatePassword(password, ethereumAddress);
+      const txreceipt = await update.wait();
+      console.log(txreceipt);
+      setResult(false);
 
-    // Send the password and Ethereum address to the contract
-    const update = await contract.updatePassword(password, ethereumAddress);
-    const txreceipt = await update.wait();
-    console.log(txreceipt);
-    setResult(false);
+    }catch(err){
+      setResult(true);
+      setError('You have not created this account') //set the error
+    }
   }
-
-  console.log(result);
 
   return (
     <div className='field'>
@@ -50,7 +55,7 @@ function UpdatePassword() {
             onChange={(event) => setEthereumAddress(event.target.value)}
           />
         </div>
-
+        {error}
         <button type="submit" className='form-btn'>Update Password</button>
       </form>
       </div>
