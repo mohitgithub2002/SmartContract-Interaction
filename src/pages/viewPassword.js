@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { contract } from '../connectContract';
 import '../pages.css'
+import CryptoJS from 'crypto-js';
 function ViewPassword() {
 
   const [ethereumAddress, setEthereumAddress] = useState(''); //for storing the ethereum address from input
@@ -15,9 +16,11 @@ function ViewPassword() {
       
       event.preventDefault();
       try{
+        
         // Send the Ethereum address to the contract
         const password = await contract.ViewPassword(ethereumAddress);
-        setPswd(password);
+        var decrypted = CryptoJS.AES.decrypt(password, "scode");
+        setPswd(decrypted);
         setResult(false)
         
       }catch(err){
