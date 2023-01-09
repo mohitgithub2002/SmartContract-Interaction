@@ -12,22 +12,21 @@ function UpdatePassword() {
 
   const [error, setError] = useState(); //for storiing the error
 
-  //Encrypt the password
-  const [encryptedPassword, setEncryptedPassword] = useState('fuck'); //for storing the encrypted password
   
 
+
   async function handleSubmit(event) {
+    
     event.preventDefault();
     try{
       
-      var encrypted = CryptoJS.AES.encrypt(password, 'scode');
-      setEncryptedPassword(encrypted.toString());
+      var encryptedPassword = CryptoJS.AES.encrypt(password, 'secret key 123').toString();
+      
       //Send the password and Ethereum address to the contract
       const update = await contract.updatePassword(encryptedPassword, ethereumAddress);
       const txreceipt = await update.wait();
       console.log(txreceipt);
       console.log(encryptedPassword);
-      console.log(password);
       setResult(false);
 
     }catch(err){
@@ -35,6 +34,8 @@ function UpdatePassword() {
       setError('You have not created this account') //set the error
     }
   }
+  
+  
 
   return (
     <div className='field'>

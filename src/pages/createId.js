@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import '../pages.css'
-import { ethers } from 'ethers';
-
+import CryptoJS from 'crypto-js';
 import {contract} from '../connectContract';
 
 function CreateId() {
@@ -14,9 +13,9 @@ function CreateId() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-
+    var encryptedPassword = CryptoJS.AES.encrypt(password, 'secret key 123').toString();
     // Send the name, email, and password to the contract
-    const create = await contract.createID(email, password, name)
+    const create = await contract.createID(email, encryptedPassword, name)
     const txreceipt = await create.wait();
     console.log(txreceipt);
     setResult(false);

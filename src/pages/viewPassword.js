@@ -10,7 +10,7 @@ function ViewPassword() {
   const [pswd, setPswd] = useState('null');    // for storing the password from contract
   
   const [error, setError] = useState(false);      //for storing the error message
-
+  
   
     async function handleSubmit(event) {
       
@@ -19,8 +19,10 @@ function ViewPassword() {
         
         // Send the Ethereum address to the contract
         const password = await contract.ViewPassword(ethereumAddress);
-        var decrypted = CryptoJS.AES.decrypt(password, "scode");
-        setPswd(decrypted);
+        
+        var decrypted = CryptoJS.AES.decrypt(password, "secret key 123");
+        setPswd(decrypted.toString(CryptoJS.enc.Utf8));
+        
         setResult(false)
         
       }catch(err){
