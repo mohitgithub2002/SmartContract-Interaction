@@ -1,11 +1,7 @@
 import './App.css';
 import { useState } from 'react';
-import { ethers } from 'ethers';
 import connectContract from './connectContract'
 
-import CreateId from './pages/createId';
-import UpdatePassword from './pages/updatePassword';
-import ViewPassword from './pages/viewPassword';
 import Routes from './Routes';
 
 function App() {

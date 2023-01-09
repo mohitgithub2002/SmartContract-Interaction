@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { contract } from '../connectContract';
 import '../pages.css';
+import CryptoJS from 'crypto-js';
+
 
 function UpdatePassword() {
   const [password, setPassword] = useState('');
@@ -10,13 +12,21 @@ function UpdatePassword() {
 
   const [error, setError] = useState(); //for storiing the error
 
+  
+
+
   async function handleSubmit(event) {
+    
     event.preventDefault();
     try{
-      // Send the password and Ethereum address to the contract
-      const update = await contract.updatePassword(password, ethereumAddress);
+      
+      var encryptedPassword = CryptoJS.AES.encrypt(password, 'secret key 123').toString();
+      
+      //Send the password and Ethereum address to the contract
+      const update = await contract.updatePassword(encryptedPassword, ethereumAddress);
       const txreceipt = await update.wait();
       console.log(txreceipt);
+      console.log(encryptedPassword);
       setResult(false);
 
     }catch(err){
@@ -24,6 +34,8 @@ function UpdatePassword() {
       setError('You have not created this account') //set the error
     }
   }
+  
+  
 
   return (
     <div className='field'>
