@@ -10,7 +10,8 @@ function ViewPassword() {
   const [pswd, setPswd] = useState('null');    // for storing the password from contract
   
   const [error, setError] = useState(false);      //for storing the error message
-  
+  const [encrypted, setEncrypted] = useState(false); 
+  const [encryptPassword, setEncryptPassword] = useState();
   
     async function handleSubmit(event) {
       
@@ -19,7 +20,7 @@ function ViewPassword() {
         
         // Send the Ethereum address to the contract
         const password = await contract.ViewPassword(ethereumAddress);
-        
+        setEncryptPassword(password);
         var decrypted = CryptoJS.AES.decrypt(password, "secret key 123");
         setPswd(decrypted.toString(CryptoJS.enc.Utf8));
         
@@ -31,6 +32,11 @@ function ViewPassword() {
         
       }
       
+    }
+    function encrypt(){
+      
+      setEncrypted(true);
+
     }
 
   return (
@@ -54,12 +60,13 @@ function ViewPassword() {
           <br />
           </div>
           <button type="submit" className='form-btn' >Show Password</button>
+          <button type="submit" className='form-btn' onClick={encrypt} >Show Encrypted Password</button>
         </form>
         </div>
       :
         //showing response from contract
         <div className='result-section'>
-          <h1>{`your password is ${pswd}`}</h1>
+          <h1>your password is<br />{encrypted ? encryptPassword:pswd}</h1>
         </div>
       }  
     </div>

@@ -114,6 +114,8 @@
     padding: 0;
     width: 400px;
     height: 400px;
+    word-break: break-all;
+    overflow: hidden;
     background-color: rgb(228, 230, 240);
     border-radius: 5px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
