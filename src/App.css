@@ -6,7 +6,7 @@
 
 
 .App-header {
-  background-color: #282c34;
+  background-color: #000000;
   min-height: 5vh;
   max-height: 10vh;
   display: flex;
@@ -24,13 +24,24 @@
 
 
 button {
-  background-color: rgb(244, 203, 42);
+  background-color: #06813D;
   width: 200px;
   font-size: 20px;
+  border-width: 5px;
+  
   padding: 5px;
   margin: 5px;
   font-family: sans-serif;
 }
 button:hover{
   background-color: whitesmoke;
+}
+
+.content{
+  height: 650px;
+  background-image: url('../public/bgimage.jpg');
+  background-size: cover;
+  background-blend-mode: color-dodge;
+  background-repeat:repeat-y;
+  background-position: center center;
 }

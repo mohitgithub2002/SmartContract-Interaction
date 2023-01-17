@@ -30,11 +30,11 @@ function App() {
         <p>{account}</p>
         <button onClick = {connectMetamask}  >{account? "Connected":"Connect to Metamask" }</button> <br />
       </header>
-      <section>
-        <div className = "content">
+      <div className = "content">
+        <div >
           <Routes />
         </div>
-      </section>
+      </div>
     </div>
   );
 }

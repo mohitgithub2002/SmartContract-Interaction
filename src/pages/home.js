@@ -16,11 +16,14 @@ function Home (){
 
 
 return (
-    <div className = "body">
-        <img src="bitcoin.png" alt="fillimage" className="img" ></img>
+    
+    <div className="field">
+        <div className = "home-section">
+        <img src="icon.png" alt="fillimage" className="img" ></img>
         <button onClick={signup} className="button" >Create Id</button><br />
         <button onClick={update} className="button">Update Password</button><br />
         <button onClick={view} className="button">View Password</button><br />
+    </div>
     </div>
 )
 }
